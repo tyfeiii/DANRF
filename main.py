@@ -54,11 +54,9 @@ if __name__ == "__main__":
 
     parser.add_argument('--mode', type=str, default='test')
     parser.add_argument('--load_mode', type=int, default=0)
-    parser.add_argument('--saved_path', type=str, default='/data/tangyufei/dataset/siemensnew/test')  #D:/tyf/dataset/fakedata/train1 H:/深度学习/级联去噪/data/1008-lesion
-    #/data/tangyufei/dataset/simens/1/
-    # parser.add_argument('--saved_path', type=str, default='./test') #test,delete later
-    parser.add_argument('--save_path', type=str, default='./save32/')
-    parser.add_argument('--test_patient', type=str, default='LDCT')#TESTLDCTDL
+    parser.add_argument('--saved_path', type=str, default='/data/tangyufei/dataset/siemensnew/test')
+    parser.add_argument('--save_path', type=str, default='./save1/')
+    parser.add_argument('--test_patient', type=str, default='LDCT')#TEST
     parser.add_argument('--result_fig', type=bool, default=True)
     parser.add_argument('--norm_range_min', type=float, default=-1024.0)
     parser.add_argument('--norm_range_max', type=float, default=2048.0)#3072
@@ -68,11 +66,11 @@ if __name__ == "__main__":
     parser.add_argument('--patch_n', type=int, default=20)  # 10
     parser.add_argument('--patch_size', type=int, default=80)
     parser.add_argument('--batch_size', type=int, default=1)  # 16
-    parser.add_argument('--num_epochs', type=int, default=60)  #1400
+    parser.add_argument('--num_epochs', type=int, default=60)
     parser.add_argument('--print_iters', type=int, default=20)
     parser.add_argument('--decay_iters', type=int, default=3406*15)  #
     parser.add_argument('--save_iters', type=int, default=3406)  #
-    parser.add_argument('--test_iters', type=int, default=3406*60) #    927*1
+    parser.add_argument('--test_iters', type=int, default=3406*60) #
     parser.add_argument('--lr', type=float, default=5e-5)#
     parser.add_argument('--device', type=str)
     parser.add_argument('--num_workers', type=int, default=4)

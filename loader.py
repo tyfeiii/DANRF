@@ -10,7 +10,7 @@ class ct_dataset(Dataset):
         assert load_mode in [0,1], "load_mode is 0 or 1"
 
         input_path = sorted(glob(os.path.join(saved_path, '*_input*.npy')))#
-        target_path = sorted(glob(os.path.join(saved_path, '*_input*.npy')))
+        target_path = sorted(glob(os.path.join(saved_path, '*_target*.npy')))
         self.load_mode = load_mode
         self.patch_n = patch_n
         self.patch_size = patch_size

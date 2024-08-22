@@ -36,7 +36,7 @@ def save_dataset(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_path', type=str, default='./save32/pred/')
-    parser.add_argument('--data_path1', type=str, default='./save32/pred_MAT/')
+    parser.add_argument('--data_path', type=str, default='./save1/pred/')
+    parser.add_argument('--data_path1', type=str, default='./save1/pred_MAT/')
     args = parser.parse_args()
     save_dataset(args)

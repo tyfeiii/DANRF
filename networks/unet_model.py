@@ -42,7 +42,6 @@ class UNet(nn.Module):
 
 
 if __name__ == '__main__':
-    # m = AENet()
     m = UNet(1,1)
     # input1=torch.randn(21,256,4,4)
     input1 = torch.randn(21, 1, 64, 64)

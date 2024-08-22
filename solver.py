@@ -112,9 +112,9 @@ class Solver(object):
 
     def save_model(self, iter_):
         f = os.path.join(self.save_path, 'UNet_{}iter.ckpt'.format(iter_))
-        f1 = os.path.join(self.save_path, 'UNetteacher_{}iter.ckpt'.format(iter_))
+        # f1 = os.path.join(self.save_path, 'UNetteacher_{}iter.ckpt'.format(iter_))
         torch.save(self.UNet.state_dict(), f)
-        torch.save(self.teacher.state_dict(), f1)
+        # torch.save(self.teacher.state_dict(), f1)
 
 
     def load_model(self, iter_):
@@ -184,7 +184,7 @@ class Solver(object):
 
         # 加载teacher
         #####################################################
-        f = os.path.join('/home/wangjiping/tyfcode/域适应/2Unet_5/networks/teacher-save/', 'UNet_{}iter.ckpt'.format(227900))#
+        f = os.path.join('/home/DANRF/networks/teacher-save/', 'UNet_{}iter.ckpt'.format(227900))#
         self.teacher.load_state_dict(torch.load(f))
         ########################################################
 
@@ -397,16 +397,6 @@ class Solver(object):
                                       patch_size=None, transform=False)
                 data_loader = DataLoader(dataset=dataset_, batch_size=None, shuffle=True, num_workers=0)
 
-                # self.WGAN_VGG_generator1 = UNet(1,1).to(self.device)
-                # f = os.path.join(self.save_path, 'UNet_{}iter.ckpt'.format((epoch + 1) * self.save_iters))  # 修改
-                # if self.multi_gpu:
-                #     state_d = OrderedDict()
-                #     for k, v in torch.load(f):
-                #         n = k[7:]
-                #         state_d[n] = v
-                #     self.WGAN_VGG_generator1.load_state_dict(state_d)
-                # else:
-                #     self.WGAN_VGG_generator1.load_state_dict(torch.load(f))
 
                 with torch.no_grad():
 
@@ -433,15 +423,15 @@ class Solver(object):
             #########################################################
             # 日志文件
 
-                with open('./save32/pred_psnr_avg.txt', 'a') as f:
+                with open('./save1/pred_psnr_avg.txt', 'a') as f:
                     f.write('EPOCH:%d loss:%.20f' % (epoch, pred_psnr_avg / len(data_loader)) + '\n')
                     f.close()
 
-                with open('./save32/pred_ssim_avg.txt', 'a') as f:
+                with open('./save1/pred_ssim_avg.txt', 'a') as f:
                     f.write('EPOCH:%d loss:%.20f' % (epoch, pred_ssim_avg / len(data_loader)) + '\n')
                     f.close()
 
-                with open('./save32/pred_rmse_avg.txt', 'a') as f:
+                with open('./save1/pred_rmse_avg.txt', 'a') as f:
                     f.write('EPOCH:%d loss:%.20f' % (epoch, pred_rmse_avg / len(data_loader)) + '\n')
                     f.close()
                 pred_psnr_avg = 0

@@ -24,14 +24,6 @@ class UNet1(nn.Module):
         self.up4 = Up(128, 64, bilinear)
         self.outc = OutConv(64, n_classes)
 
-        # self.style_bank = Sequential(
-        #     nn.Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False),
-        #     nn.InstanceNorm2d(1024),
-        #     nn.ReLU(inplace=True),
-        #     nn.Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False),
-        #     nn.InstanceNorm2d(1024),
-        #     nn.ReLU(inplace=True)
-        # )
 
 
     def forward(self, x):
@@ -41,7 +33,6 @@ class UNet1(nn.Module):
         x3 = self.down2(x2)
         x4 = self.down3(x3)
         x5 = self.down4(x4)
-        # print(x5.shape)
         x = self.up1(x5, x4)
         x = self.up2(x, x3)
         x = self.up3(x, x2)
@@ -49,30 +40,12 @@ class UNet1(nn.Module):
         logits = self.outc(x)
         logits = x0 - logits
 
-        # if style_id is not None:
-        # 		new_z = []
-        # 		for idx, i in enumerate(style_id):
-        # 			zs = self.style_bank[i](x5[idx].view(1, *x5[idx].shape))
-        # 			new_z.append(zs)
-        # 		z = torch.cat(new_z, dim=0)
-        # else:
-        #     x6=x5
-        # x6 = self.style_bank(x5)
-        # x = self.up1(x6, x4)
-        # x = self.up2(x, x3)
-        # x = self.up3(x, x2)
-        # x = self.up4(x, x1)
-        # style = self.outc(x)
-        # style = x0 - style
 
         return logits,x5
 
 
 if __name__ == '__main__':
-    # m = AENet()
     m = UNet1(1,1)
-    # print(list(m.state_dict().keys()))
-    # input1=torch.randn(21,256,4,4)
     input1 = torch.randn(21, 1, 64, 64)
     # input2=torch.randn(21,512,8,8)
     (output1,output2) = m(input1)
